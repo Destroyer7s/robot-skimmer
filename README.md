@@ -18,7 +18,7 @@ from urllib.request import urlopen
 
 url = ""
 counter = 0
-with open('topmillion.csv', newline='') as csvfile:
+with open('topmillion.csv', newline='') as csvfile: # Allows top million url's to be read directly from and excel sheet or .csv file
     with open('scraped_robots.txt', 'w') as file:
         data = csv.DictReader(csvfile)
         print("|--------------------------|")
@@ -30,7 +30,6 @@ with open('topmillion.csv', newline='') as csvfile:
             url = "https://www." + row['URL'] + '/robots.txt'
             try:
                 page = urlopen(url)
-                #print("COUNTER" + str(counter))
                 html = page.read().decode("utf-8")
                 print(html)
                 pattern = "/"
@@ -38,16 +37,13 @@ with open('topmillion.csv', newline='') as csvfile:
                 title = match_results.group()
                 title = re.sub("<.*?>", "", title) # Remove HTML tags
                 file.write("~"*30 + "\r\n")
-                file.write(url + "\r\n")
+                file.write(url + "\r\n")  # Simple formating to view contents of robots.txt files by site much easier
                 file.write(html + "\r\n")
                 print("Writing: " + html)
                 file.write("~"*30)
                 counter += 1
             except Exception as inst:
                 print("Error opening: " + url)
-                print(type(inst))    # the exception instance
-                print(inst.args)     # arguments stored in .args
-                print(inst)
                 counter += 1
 
 
