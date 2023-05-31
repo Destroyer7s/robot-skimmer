@@ -1,5 +1,6 @@
 # robot-skimmer
 
+Dumb tool I made when I was bored
 
 This is a robots.txt scraper spider scripted in Python.
 
